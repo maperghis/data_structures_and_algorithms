@@ -10,10 +10,13 @@ class Node(object):
         self.value = value
         self.next = None
 
-    def nextNode(self, node=None):
+    def nextNode(self, **kwargs):
         '''Set next node'''
-        if node:
-            self.next = node
+        # Slight change to my usual implementation, can't use my usual node=None
+        #   because sometimes we want to change the next node to None!
+        #   Use kwargs instead.
+        if 'node' in kwargs:
+            self.next = kwargs.get('node')
         return self.next
 
 
@@ -31,7 +34,7 @@ class LinkedList(object):
         linked list.'''
         temp = self.head
         self.head = node
-        node.nextNode(temp)
+        node.nextNode(node=temp)
         self.count += 1
         if self.count == 1:
             self.tail = self.head
@@ -43,9 +46,18 @@ class LinkedList(object):
         if self.count == 0:
             self.head = node
         else:
-            self.tail.nextNode(node)
+            self.tail.nextNode(node=node)
         self.tail = node
         self.count += 1
+
+    def removeFirst(self):
+        '''Remove the first node from the list, this operation has a constant
+        time complexity.'''
+        if self.count != 0:
+            self.head = self.head.nextNode()
+            self.count -= 1
+            if self.count == 1:
+                self.tail = None
 
     def removeLast(self):
         '''Remove the last node from the list, this operation requires
@@ -61,31 +73,37 @@ class LinkedList(object):
                 current = self.head
                 while current.nextNode() != self.tail:
                     current = current.nextNode()
-                current.nextNode(None)
+                current.nextNode(node=None)
                 self.tail = current
             self.count -= 1
 
     def __str__(self):
         '''String representation'''
-        head = None if not self.head else self.head.value
-        tail = None if not self.tail else self.tail.value
-        return "Head:{0} Tail:{1} Count:{2}".format(head, tail, self.count)
+        ret = []
+        if self.head != None:
+            node = self.head
+            while node != None:
+                ret.append(node.value)
+                node = node.nextNode()
+        return str(ret)
 
 
 if __name__ == '__main__':
     llist = LinkedList()
-    print str(llist)
+    print "start", llist
     A = Node(3)
     llist.addFirst(A)
-    print str(llist)
+    print "add first 3", llist
     B = Node(8)
     llist.addFirst(B)
-    print llist
+    print "add first 8", llist
     C = Node(1)
     llist.addLast(C)
-    print llist
+    print "add last 1", llist
     D = Node(2)
     llist.addLast(D)
-    print llist
+    print "add last 2", llist
     llist.removeLast()
-    print llist
+    print "remove last", llist
+    llist.removeFirst()
+    print "remove first", llist
