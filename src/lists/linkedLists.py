@@ -77,6 +77,14 @@ class LinkedList(object):
                 self.tail = current
             self.count -= 1
 
+    def enumerate(self):
+        '''Enumerate over the linked list'''
+        if self.head:
+            node = self.head
+            while node != None:
+                yield node
+                node = node.nextNode()
+
     def __str__(self):
         '''String representation'''
         ret = []
@@ -107,3 +115,6 @@ if __name__ == '__main__':
     print "remove last", llist
     llist.removeFirst()
     print "remove first", llist
+    nodes = llist.enumerate()
+    for n in nodes:
+        print n.value
