@@ -10,15 +10,6 @@ class Node(object):
         self.value = value
         self.next = None
 
-    def nextNode(self, **kwargs):
-        '''Set next node'''
-        # Slight change to my usual implementation, can't use my usual node=None
-        #   because sometimes we want to change the next node to None!
-        #   Use kwargs instead.
-        if 'node' in kwargs:
-            self.next = kwargs.get('node')
-        return self.next
-
 
 class LinkedList(object):
     '''Implementation of a linked list'''
@@ -34,10 +25,11 @@ class LinkedList(object):
         linked list.'''
         temp = self.head
         self.head = node
-        node.nextNode(node=temp)
-        self.count += 1
-        if self.count == 1:
+        node.next=temp
+        if self.count == 0:
+            # list was empty so set tail
             self.tail = self.head
+        self.count += 1
 
     def addLast(self, node):
         '''Add a node to the end of the linked list, this operation has a
@@ -46,7 +38,7 @@ class LinkedList(object):
         if self.count == 0:
             self.head = node
         else:
-            self.tail.nextNode(node=node)
+            self.tail.next=node
         self.tail = node
         self.count += 1
 
@@ -54,7 +46,7 @@ class LinkedList(object):
         '''Remove the first node from the list, this operation has a constant
         time complexity.'''
         if self.count != 0:
-            self.head = self.head.nextNode()
+            self.head = self.head.next
             self.count -= 1
             if self.count == 1:
                 self.tail = None
@@ -71,9 +63,9 @@ class LinkedList(object):
                 self.tail = None
             else:
                 current = self.head
-                while current.nextNode() != self.tail:
-                    current = current.nextNode()
-                current.nextNode(node=None)
+                while current.next != self.tail:
+                    current = current.next
+                current.next=None
                 self.tail = current
             self.count -= 1
 
@@ -94,7 +86,7 @@ class LinkedList(object):
                     # Case 3b, node is in middle or end
                     # Before: Head -> 3 -> 5 -> None
                     # After:  Head -> 3 ------> None
-                    previous.nextNode(node=current.nextNode())
+                    previous.next=current.next
                     if current.next == None:
                         # it was the end so update tail
                         self.tail = previous
@@ -103,7 +95,7 @@ class LinkedList(object):
                     # 3a, node is first
                     self.removeFirst()
             previous = current
-            current = current.nextNode()
+            current = current.next
 
     def enumerate(self):
         '''Enumerate over the linked list'''
@@ -111,7 +103,7 @@ class LinkedList(object):
             node = self.head
             while node != None:
                 yield node
-                node = node.nextNode()
+                node = node.next
 
     def contains(self, value):
         '''Check to see if the linked list contains the given value'''
@@ -165,5 +157,5 @@ if __name__ == '__main__':
     print llist.copyToList()
     llist.remove(1)
     print "remove 1", llist
-    llist.remove(3)
-    print "remove 3", llist
+    llist.clear()
+    print "clear", llist
