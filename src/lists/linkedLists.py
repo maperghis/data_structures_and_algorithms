@@ -91,13 +91,16 @@ class LinkedList(object):
         while current != None:
             if current.value == value:
                 if previous != None:
-                    # 3b
+                    # Case 3b, node is in middle or end
+                    # Before: Head -> 3 -> 5 -> None
+                    # After:  Head -> 3 ------> None
                     previous.nextNode(node=current.nextNode())
                     if current.next == None:
+                        # it was the end so update tail
                         self.tail = previous
                     self.count -= 1
                 else:
-                    print "remove first"
+                    # 3a, node is first
                     self.removeFirst()
             previous = current
             current = current.nextNode()
