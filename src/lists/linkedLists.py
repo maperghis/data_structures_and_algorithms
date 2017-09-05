@@ -77,6 +77,31 @@ class LinkedList(object):
                 self.tail = current
             self.count -= 1
 
+    def remove(self, value):
+        '''Remove an item from the list by value, this operation has its best
+        time complexity as constant and worst time complexity as O(n)
+        1) empty list - do nothing
+        2) single node (previous is None)
+        3) many nodes:
+            a) node to remove is the first node
+            b) node to remove is in the middle or end
+        '''
+        previous = None
+        current = self.head
+        while current != None:
+            if current.value == value:
+                if previous != None:
+                    # 3b
+                    previous.nextNode(node=current.nextNode())
+                    if current.next == None:
+                        self.tail = previous
+                    self.count -= 1
+                else:
+                    print "remove first"
+                    self.removeFirst()
+            previous = current
+            current = current.nextNode()
+
     def enumerate(self):
         '''Enumerate over the linked list'''
         if self.head:
@@ -129,3 +154,7 @@ if __name__ == '__main__':
     print llist.contains(1)
     print llist.contains(9)
     print llist.copyToList()
+    llist.remove(1)
+    print "remove 1", llist
+    llist.remove(3)
+    print "remove 3", llist
