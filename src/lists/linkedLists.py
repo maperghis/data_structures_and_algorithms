@@ -127,6 +127,12 @@ class LinkedList(object):
             ret.append(node.value)
         return ret
 
+    def clear(self):
+        '''Clear linked list'''
+        self.head = None
+        self.tail = None
+        self.count = 0
+
     def __str__(self):
         '''String representation'''
         return str(self.copyToList())
