@@ -14,12 +14,18 @@ class Node(object):
             self.next = node
         return self.next
 
+
+def printChain(node):
+    '''Print a chain of nodes'''
+    while node != None:
+        print node.value
+        node = node.nextNode()
+
+
 if __name__ == '__main__':
     A = Node(1)
     B = Node(2)
     C = Node(3)
     A.nextNode(B)
     B.nextNode(C)
-    print A.value
-    print A.nextNode().value
-    print A.nextNode().nextNode().value
+    printChain(A)
