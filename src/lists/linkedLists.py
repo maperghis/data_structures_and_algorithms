@@ -85,15 +85,23 @@ class LinkedList(object):
                 yield node
                 node = node.nextNode()
 
+    def contains(self, value):
+        '''Check to see if the linked list contains the given value'''
+        for node in self.enumerate():
+            if node.value == value:
+                return True
+        return False
+
+    def copyToList(self):
+        '''Copy linked list to an array'''
+        ret = []
+        for node in self.enumerate():
+            ret.append(node.value)
+        return ret
+
     def __str__(self):
         '''String representation'''
-        ret = []
-        if self.head != None:
-            node = self.head
-            while node != None:
-                ret.append(node.value)
-                node = node.nextNode()
-        return str(ret)
+        return str(self.copyToList())
 
 
 if __name__ == '__main__':
@@ -118,3 +126,6 @@ if __name__ == '__main__':
     nodes = llist.enumerate()
     for n in nodes:
         print n.value
+    print llist.contains(1)
+    print llist.contains(9)
+    print llist.copyToList()
