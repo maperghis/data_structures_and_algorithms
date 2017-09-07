@@ -1,8 +1,9 @@
 language: python
 install: true
 python:
-  - "2.6"
   - "2.7"
+before_install:
+  - export PYTHONPATH=$HOME/builds/maperghis/data_structures_and_algorithms
 install:
   - pip install -r requirements.txt
 script:
