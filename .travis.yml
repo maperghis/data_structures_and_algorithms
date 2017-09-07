@@ -1,0 +1,8 @@
+language: python
+install: true
+python:
+  - "2.6"
+  - "2.7"
+pip install -r requirements.txt
+script:
+  - python src/lists/test/testNodeChain.py
