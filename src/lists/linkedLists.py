@@ -1,10 +1,18 @@
-'''Linked lists are a single chain of nodes, providing a head & tail pointer
-and operations to add, remove, find and enumerate. Linked lists have very
-efficient insertion
-'''
+#!/usr/bin/env python
+"""
+:created on: 05-09-2017
+:modified on: 07-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+
+Linked Lists are a single chain of nodes which provide pointers to the head and
+tail of the chain. This class provides operations to add, remove, find and
+enumerate nodes.
+"""
+
 
 class Node(object):
-    '''A node has a value and a pointer to the next node in the chain'''
+    """A node has a value and a pointer to the next node in the chain"""
 
     def __init__(self, value):
         self.value = value
@@ -12,7 +20,7 @@ class Node(object):
 
 
 class LinkedList(object):
-    '''Implementation of a linked list'''
+    """Implementation of a linked list"""
 
     def __init__(self):
         self.head = None
@@ -20,9 +28,12 @@ class LinkedList(object):
         self.count = 0
 
     def addFirst(self, node):
-        '''Add a node to the start of the linked list, this operation has a
+        """Add a node to the start of the linked list. This operation has a
         constant time complexity regardless of the number of nodes in the
-        linked list.'''
+        linked list.
+        :param node: node to insert
+        :type node: Node
+        """
         temp = self.head
         self.head = node
         node.next=temp
@@ -32,9 +43,12 @@ class LinkedList(object):
         self.count += 1
 
     def addLast(self, node):
-        '''Add a node to the end of the linked list, this operation has a
+        """Add a node to the end of the linked list. This operation has a
         constant time complexity regardless of the number of nodes in the
-        linked list.'''
+        linked list.
+        :param node: node to insert
+        :type node: Node
+        """
         if self.count == 0:
             self.head = node
         else:
@@ -43,8 +57,8 @@ class LinkedList(object):
         self.count += 1
 
     def removeFirst(self):
-        '''Remove the first node from the list, this operation has a constant
-        time complexity.'''
+        """Remove the first node from the linked list. This operation has a
+        constant time complexity."""
         if self.count != 0:
             self.head = self.head.next
             self.count -= 1
@@ -52,11 +66,10 @@ class LinkedList(object):
                 self.tail = None
 
     def removeLast(self):
-        '''Remove the last node from the list, this operation requires
-        enumerating over all elements in the list. This is because we only
+        """Remove the last node from the linked list. This operation requires
+        enumerating over all elements in the list, because we only
         store the head and tail references and we need to update the second to
-        last node.
-        This operation has time complexity O(n).'''
+        last node. This operation has time complexity O(n)."""
         if self.count != 0:
             if self.count == 1:
                 self.head = None
@@ -70,14 +83,15 @@ class LinkedList(object):
             self.count -= 1
 
     def remove(self, value):
-        '''Remove an item from the list by value, this operation has its best
-        time complexity as constant and worst time complexity as O(n)
+        """Remove an item from the linked list given its value. This operation
+        has at best, a constant time complexity and at worst, O(n).
         1) empty list - do nothing
         2) single node (previous is None)
         3) many nodes:
             a) node to remove is the first node
             b) node to remove is in the middle or end
-        '''
+        :param value: remove node with this property
+        """
         previous = None
         current = self.head
         while current != None:
@@ -98,7 +112,7 @@ class LinkedList(object):
             current = current.next
 
     def enumerate(self):
-        '''Enumerate over the linked list'''
+        """Enumerate over the linked list"""
         if self.head:
             node = self.head
             while node != None:
@@ -106,27 +120,30 @@ class LinkedList(object):
                 node = node.next
 
     def contains(self, value):
-        '''Check to see if the linked list contains the given value'''
+        """Check to see if the linked list contains the given value"""
         for node in self.enumerate():
             if node.value == value:
                 return True
         return False
 
     def copyToList(self):
-        '''Copy linked list to an array'''
+        """Copy linked list to a python list object
+        :returns: linked list as a list
+        :rtype: List
+        """
         ret = []
         for node in self.enumerate():
             ret.append(node.value)
         return ret
 
     def clear(self):
-        '''Clear linked list'''
+        """Clear linked list"""
         self.head = None
         self.tail = None
         self.count = 0
 
     def __str__(self):
-        '''String representation'''
+        """String representation"""
         return str(self.copyToList())
 
 
