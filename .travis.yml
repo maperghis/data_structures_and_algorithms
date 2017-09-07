@@ -3,7 +3,7 @@ install: true
 python:
   - "2.7"
 before_install:
-  - export PYTHONPATH=$HOME/builds/maperghis/data_structures_and_algorithms
+  - export PYTHONPATH=$PYTHONPATH:`pwd`
 install:
   - pip install -r requirements.txt
 script:
