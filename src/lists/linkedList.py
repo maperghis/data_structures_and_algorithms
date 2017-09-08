@@ -72,8 +72,10 @@ class LinkedList(object):
         last node. This operation has time complexity O(n)."""
         if self.count != 0:
             if self.count == 1:
+                temp = self.head
                 self.head = None
                 self.tail = None
+                temp.next = None
             else:
                 current = self.head
                 while current.next != self.tail:
