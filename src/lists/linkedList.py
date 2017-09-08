@@ -62,7 +62,7 @@ class LinkedList(object):
         if self.count != 0:
             self.head = self.head.next
             self.count -= 1
-            if self.count == 1:
+            if self.count == 0:
                 self.tail = None
 
     def removeLast(self):
@@ -98,18 +98,36 @@ class LinkedList(object):
             if current.value == value:
                 if previous != None:
                     # Case 3b, node is in middle or end
-                    # Before: Head -> 3 -> 5 -> None
-                    # After:  Head -> 3 ------> None
                     previous.next=current.next
                     if current.next == None:
-                        # it was the end so update tail
+                        # It was the end so update tail
+                        # Before: Head -> 3 -> 5 -> None
+                        # After:  Head -> 3 ------> None
                         self.tail = previous
                     self.count -= 1
+                    # Middle node removed needs next pointer set to None
+                    # Before: Head -> 3 -> 5 -> 7 -> None
+                    # After:  Head -> 3 ------> 7 -> None
+                    #           5 -> None
+                    temp = current
+                    current = current.next
+                    temp.next = None
                 else:
                     # 3a, node is first
-                    self.removeFirst()
-            previous = current
-            current = current.next
+                    self.head = self.head.next
+                    # Before: Head -> 3 -> 5 -> None
+                    # After: Head -------> 5 -> None
+                    #           3 -> None
+                    temp = current
+                    current = current.next
+                    temp.next = None
+                    self.count -= 1
+                    if self.count == 0:
+                        previous = None
+                        self.tail = None
+            else:
+                previous = current
+                current = current.next
 
     def enumerate(self):
         """Enumerate over the linked list"""
