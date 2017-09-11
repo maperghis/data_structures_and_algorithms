@@ -1,14 +1,21 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 
 
 class SentenceReversal(object):
-    '''Given a string of words, reverse all the words, removing white spaces'''
+    """Given a string of words, reverse all the words, removing white spaces"""
 
     def rev_word(cls, s):
-        '''My solution using built in split and array reveral'''
+        """My solution using built in split and array reveral"""
         return " ".join(s.split()[::-1])
 
     def rev_word2(cls, s):
-        '''Solution without the built in split function'''
+        """Solution without the built in split function"""
         words = []
         length = len(s)
         spaces = [' ']

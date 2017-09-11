@@ -1,24 +1,28 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 
 
 class StringCompression(object):
-    '''Given a string in the form 'AAAABBBBCCCCCDDEEEE' compress it to become
+    """Given a string in the form 'AAAABBBBCCCCCDDEEEE' compress it to become
     'A4B4C5D2E4'. For this problem, you can falsely "compress" strings of
     single or double letters. For instance, it is okay for 'AAB' to return
-    'A2B1' even though this technically takes more space.'''
+    'A2B1' even though this technically takes more space."""
 
     def compress(cls, s):
+        """Compress the string"""
         result = ""
         length = len(s)
-
         if len(s) == 0:
             return ""
-
         if len(s) == 1:
             return s[0] + "1"
-
         i = 1
         count = 1
-
         while i < length:
             if s[i] == s[i - 1]:
                 count += 1

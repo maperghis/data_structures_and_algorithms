@@ -1,11 +1,18 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 
 
 class LargestContinuousSum(object):
-    '''Given an array of integers (positive and negative) find the largest
-    continuous sum.'''
+    """Given an array of integers (positive and negative) find the largest
+    continuous sum."""
 
     def large_cont_sum(cls, arr):
-        '''Solution'''
+        """Solution"""
         if len(arr) == 0:
             return 0
         max_sum = current_sum = arr[0]

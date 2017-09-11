@@ -1,11 +1,18 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 
 
 class IntegerPairSum(cls):
-    '''Given an integer array, output all the unique pairs that
-    sum up to a specific value k'''
+    """Given an integer array, output all the unique pairs that
+    sum up to a specific value k"""
 
     def pair_sum1(cls, arr, k):
-        '''My solution O(n^2)'''
+        """My solution O(n^2)"""
         if len(arr) < 2:
             return 0
         pairs = []
@@ -18,7 +25,7 @@ class IntegerPairSum(cls):
         return len(set(pairs))
 
     def pair_sum2(cls, arr, k):
-        '''Better alogorithm O(n) linear'''
+        """Better alogorithm O(n) linear"""
         if len(arr) < 2:
             return 0
         seen = set()

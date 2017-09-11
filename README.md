@@ -2,4 +2,16 @@
 
 # Data Structures and Algorithms
 
-Start of a new project in which I will recap my understanding on this topic.
+In this project I demonstrate my understanding of a variety of topics including:
+* Arrays based sequences, particularly focused on special string test cases.
+For example, given two strings find out if they are anagrams of each other.
+* Stacks.
+* Deque.
+* Queues.
+* Singularly linked lists.
+* Doubly linked lists.
+* Recursion.
+* Trees, particularly binary trees.
+* Hash tables.
+* Searching and Sorting.
+* Graph Algorithms.

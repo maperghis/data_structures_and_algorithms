@@ -1,14 +1,21 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 import collections
 
 
 class MissingElement(object):
-    '''Consider an array of non-negative integers. A second array is formed by
+    """Consider an array of non-negative integers. A second array is formed by
     shuffling the elements of the first array and deleting a random element.
     Given these two arrays, find which element is missing in the second
-    array.'''
+    array."""
 
     def finder1(cls, arr1, arr2):
-        '''My solution 0(n)'''
+        """My solution 0(n)"""
         arr1.sort()
         new_arr = sorted(arr2)
         for num in arr1:
@@ -20,7 +27,7 @@ class MissingElement(object):
         return -1
 
     def finder2(cls, arr1, arr2):
-        '''Alternative solution O(nlogn)'''
+        """Alternative solution O(nlogn)"""
         arr1.sort()
         arr2.sort()
 
@@ -30,7 +37,7 @@ class MissingElement(object):
         return arr1[-1]
 
     def finder3(cls, arr1, arr2):
-        '''Alternative solution O(n)'''
+        """Alternative solution O(n)"""
         d = collections.defaultdict(int)
         for num in arr2:
             d[num] += 1

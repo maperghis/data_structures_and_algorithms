@@ -1,17 +1,24 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 
 
 class UniqueCharacters(object):
-    '''Given a string,determine if it is compreised of all unique characters.
+    """Given a string,determine if it is compreised of all unique characters.
     For example, the string 'abcde' has all unique characters and should
     return True. The string 'aabcde' contains duplicate characters and should
-    return false.'''
+    return false."""
 
     def unique_chars(cls, s):
-        '''My solution using sets'''
+        """My solution using sets"""
         return len(set(s)) == len(s)
 
     def unique_chars2(cls, s):
-        '''Alternative solution'''
+        """Alternative solution"""
         seen = set()
         for char in s:
             if char not in seen:

@@ -1,13 +1,21 @@
+#!/usr/bin/env python
+"""
+:created on: 04-09-2017
+:modified on: 11-09-2017
+:author: Miranda Aperghis <miranda>
+:contact: miranda.aperghis@gmail.com
+"""
 
 
 class Fibonnaci(object):
-    '''Implement a Fibonnaci Sequence in three different ways:
+    """Implement a Fibonnaci Sequence in three different ways:
         - Recursively
         - Dynamically (Using Memoization to store results)
-        - Iteratively'''
+        - Iteratively
+    """
 
     def fib_rec(n):
-        '''Recursively'''
+        """Recursively"""
         if n == 0 or n == 1:
             return n
         return fib_rec(n-1) + fib_rec(n-2)
@@ -16,7 +24,7 @@ class Fibonnaci(object):
     cache = [None] * (n + 1)
 
     def fib_dyn(n):
-        '''Dynamically'''
+        """Dynamically"""
         if n == 0 or n == 1:
             return n
         # Check cache
@@ -27,7 +35,7 @@ class Fibonnaci(object):
         return cache[n]
 
     def fib_iter(n):
-        '''Iteratively'''
+        """Iteratively"""
         a = 0
         b = 1
         for i in range(n):
