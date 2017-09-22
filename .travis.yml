@@ -11,3 +11,5 @@ install:
 script:
   - python src/lists/test/testNodeChain.py
   - python src/lists/test/testLinkedList.py
+  - python src/stack/test/testStackList.py
+  - python src/stack/test/testPostfixCalculator.py
