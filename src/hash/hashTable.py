@@ -7,40 +7,7 @@
 
 A hash table is a key/value associative collection.
 """
-from src.lists.doubleLinkedList import DoubleLinkedList
-
-
-class ArgumentException(Exception):
-    """Argument exception"""
-    pass
-
-
-class HashTableArrayNode(object):
-
-    def __init__(self):
-        pass
-
-    def add(self, key, value):
-        pass
-
-    def update(self, key, value):
-        pass
-
-    def remove(self, key):
-        # return true or false
-        pass
-
-    def getValue(self, key):
-        pass
-
-    def contains(self, key):
-        pass
-
-    def clear(self):
-        pass
-
-    def enumerate(self):
-        pass
+from src.hash.HashTableArrayNode import HashTableArrayNode
 
 
 class HashTable(object):
@@ -58,7 +25,10 @@ class HashTable(object):
         self._count = 0
 
     def add(self, key, value):
-        """Adds the key/value pair to the node."""
+        """Adds the key/value pair to the node.
+        :param key: new key to add
+        :param value: new value to add
+        """
         if self._count >= self._maxItemsAtCurrentSize:
             largerHashTable = [HashTableArrayNode()] * (self.capacity() * 2)
             for node in self.enumerate():
@@ -69,34 +39,60 @@ class HashTable(object):
         self._count += 1
 
     def update(self, key, value):
-        """Update the value of the existing key/value pair."""
+        """Update the value of the existing key/value pair.
+        :param key: key to update
+        :param value: new value
+        """
         self._hashTable[getIndex(key)].update(key, value)
 
     def remove(self, key):
-        """Remove the key"""
+        """Remove the key
+        :param key: key to remove
+        :returns: true if the key was removed
+        """
         removed = self._hashTable[getIndex(key)].remove(key):
         if removed:
             self._count -= 1
         return removed
 
     def getValue(self, key):
-        """Finds and returns the value for the specified key"""
+        """Finds and returns the value for the specified key
+        :param key: key to find
+        :returns: value of the given key
+        """
         return self._hashTable[getIndex(key)].getValue(key)
 
     def contains(self, key):
-        """Returns true if the key exists in the hash table"""
+        """Returns true if the key exists in the hash table
+        :param key: key to find
+        :returns: true if the key was found
+        """
         return self._hashTable[getIndex(key)].contains(key)
 
     def capacity(self):
-        """The capacity of the hash table array"""
+        """The capacity of the hash table array
+        :returns: capacity of the hash table array
+        :rtype: int
+        """
         return len(self._hashTable)
 
     def clear(self):
         """Removes every item from the hash table array"""
         for node in self._hashTable:
             node.clear()
+        self._count = 0
+        self._maxItemsAtCurrentSize = int(initialCapacity * self._fillFactor) + 1
 
     def enumerate(self):
-        """Enumerate all the values in the hash table"""
+        """Enumerate all the values in the hash table
+        :returns: generator to enumerate all NodePairs
+        """
         for node in self._hashTable:
             yield node.enumerate()
+
+    def count(self):
+        """The number of items in the hash table
+        :returns: count of items in the hash table
+        :rtype: int
+        """
+        return self._count
