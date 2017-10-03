@@ -65,14 +65,17 @@ class TestHashTableArrayNode(unittest.TestCase):
         success = self.arr.remove(self.n1.key())
         self.assertFalse(success)
 
-    #
-    # def testGetValue(self):
-    #     """Test for the getValue method"""
-    #     pass
-    #
-    # def testContains(self):
-    #     """Test for the contains method"""
-    #     pass
+    def testGetValue(self):
+        """Test for the getValue method"""
+        self.arr.add(self.n1.key(), self.n1.value())
+        self.assertEqual(self.arr.getValue(self.n1.key()), self.n1.value())
+        self.assertRaises(ArgumentException, self.arr.getValue, "jeremy")
+
+    def testContains(self):
+        """Test for the contains method"""
+        self.arr.add(self.n1.key(), self.n1.value())
+        self.assertTrue(self.arr.contains(self.n1.key()))
+        self.assertFalse(self.arr.contains("jeremy"))
     #
     # def testClear(self):
     #     """Test for the clear method"""
