@@ -4,6 +4,9 @@
 :modified on: 28-09-2017
 :author: Miranda Aperghis <miranda>
 :contact: miranda.aperghis@gmail.com
+
+A class to represent a node with a key and an associated value, for use
+in a hash table.
 """
 
 
@@ -29,3 +32,9 @@ class NodePair(object):
         if value:
             self._value = value
         return self._value
+
+    def __eq__(self, other):
+        """Override the equals method"""
+        if self._key == other.key() and self._value == other.value():
+            return True
+        return False
