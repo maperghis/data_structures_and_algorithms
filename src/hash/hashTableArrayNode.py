@@ -101,3 +101,10 @@ class HashTableArrayNode(object):
         """
         for pair in self._items.enumerate():
             yield pair.values()
+
+    def count(self):
+        """Count the number of key value pairs
+        :returns: number of items
+        :rtype: integer
+        """
+        return self._items.count
