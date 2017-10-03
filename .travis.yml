@@ -14,3 +14,4 @@ script:
   - python src/stack/test/testStackList.py
   - python src/stack/test/testPostfixCalculator.py
   - python src/queue/test/testQueueList.py
+  - python src/hash/test/testHashTableArrayNode.py

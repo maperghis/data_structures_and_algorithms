@@ -15,7 +15,7 @@ class ArgumentException(Exception):
 
 
 class HashTableArrayNode(object):
-    """A single linked list for a slot in the hash table"""
+    """A single linked list for a single slot in the hash table"""
 
     def __init__(self):
         self._items = DoubleLinkedList()
