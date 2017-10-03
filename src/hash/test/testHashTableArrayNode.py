@@ -76,18 +76,49 @@ class TestHashTableArrayNode(unittest.TestCase):
         self.arr.add(self.n1.key(), self.n1.value())
         self.assertTrue(self.arr.contains(self.n1.key()))
         self.assertFalse(self.arr.contains("jeremy"))
-    #
-    # def testClear(self):
-    #     """Test for the clear method"""
-    #     pass
-    #
-    # def testEnumerateKeys(self):
-    #     """Test for the enumerateKeys method"""
-    #     pass
-    #
-    # def testEnumerateValues(self):
-    #     """Test for the enumerateValues method"""
-    #     pass
+
+    def testClear(self):
+        """Test for the clear method"""
+        self.arr.add(self.n1.key(), self.n1.value())
+        self.assertEqual(self.arr.count(), 1)
+        self.arr.clear()
+        self.assertEqual(self.arr.count(), 0)
+
+    def testEnumerateKeys(self):
+        """Test for the enumerateKeys method"""
+        self.arr.add(self.n1.key(), self.n1.value())
+        self.arr.add(self.n2.key(), self.n2.value())
+        self.arr.add(self.n3.key(), self.n3.value())
+        self.arr.add(self.n4.key(), self.n4.value())
+        for idx, key in enumerate(self.arr.enumerateKeys()):
+            if idx == 0:
+                self.assertEqual(key, self.n4.key())
+            elif idx == 1:
+                self.assertEqual(key, self.n3.key())
+            elif idx == 2:
+                self.assertEqual(key, self.n2.key())
+            elif idx == 3:
+                self.assertEqual(key, self.n1.key())
+            else:
+                self.fail("Too many node pairs in the array")
+
+    def testEnumerateValues(self):
+        """Test for the enumerateValues method"""
+        self.arr.add(self.n1.key(), self.n1.value())
+        self.arr.add(self.n2.key(), self.n2.value())
+        self.arr.add(self.n3.key(), self.n3.value())
+        self.arr.add(self.n4.key(), self.n4.value())
+        for idx, value in enumerate(self.arr.enumerateValues()):
+            if idx == 0:
+                self.assertEqual(value, self.n4.value())
+            elif idx == 1:
+                self.assertEqual(value, self.n3.value())
+            elif idx == 2:
+                self.assertEqual(value, self.n2.value())
+            elif idx == 3:
+                self.assertEqual(value, self.n1.value())
+            else:
+                self.fail("Too many node pairs in the array")
 
 
 if __name__ == '__main__':

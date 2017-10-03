@@ -99,7 +99,7 @@ class HashTableArrayNode(object):
         :returns: generator of values
         """
         for pair in self._items.enumerate():
-            yield pair.values()
+            yield pair.value()
 
     def count(self):
         """Count the number of key value pairs
