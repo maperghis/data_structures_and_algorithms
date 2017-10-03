@@ -19,7 +19,9 @@ class HashTable(object):
         initialCapacity = capacity if capacity is not None else 10
         assert isinstance(initialCapacity, int)
         assert initialCapacity >= 1
-        self._hashTable = [HashTableArrayNode()] * initialCapacity
+        self._hashTable = []
+        for _ in range(initialCapacity):
+            self._hashTable.append(HashTableArrayNode())
         # If the array exceeds this fill percentage it will grow
         self._fillFactor = 0.75
         self._maxItemsAtCurrentSize = int(initialCapacity * self._fillFactor) + 1
@@ -31,12 +33,15 @@ class HashTable(object):
         :param value: new value to add
         """
         if self._count >= self._maxItemsAtCurrentSize:
-            largerHashTable = [HashTableArrayNode()] * (self.capacity() * 2)
+            largerHashTable = []
+            for _ in range((self.capacity() * 2)):
+                largerHashTable.append(HashTableArrayNode())
             for node in self.enumerate():
-                largerHashTable[self.getIndex(node.key)].add(node.key, node.value)
+                largerHashTable[self.getIndex(node.key())].add(node.key(), node.value())
             self._hashTable = largerHashTable
             self._maxItemsAtCurrentSize = int(self.capacity() * self._fillFactor) + 1
-        self._hashTable[self.getIndex(key)].add(key, value)
+        idx = self.getIndex(key)
+        self._hashTable[idx].add(key, value)
         self._count += 1
 
     def update(self, key, value):
@@ -88,8 +93,9 @@ class HashTable(object):
         """Enumerate all the values in the hash table
         :returns: generator to enumerate all NodePairs
         """
-        for node in self._hashTable:
-            yield node.enumerate()
+        for idx, arrNode in enumerate(self._hashTable):
+            for node in arrNode.enumerate():
+                yield node
 
     def getIndex(self, key):
         """Get the index the key should be stored at
