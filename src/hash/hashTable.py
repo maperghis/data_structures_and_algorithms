@@ -16,15 +16,15 @@ class HashTable(object):
     handle collisions."""
 
     def __init__(self, capacity=None):
-        initialCapacity = capacity if capacity is not None else 10
-        assert isinstance(initialCapacity, int)
-        assert initialCapacity >= 1
+        self._initialCapacity = capacity if capacity is not None else 10
+        assert isinstance(self._initialCapacity, int)
+        assert self._initialCapacity >= 1
         self._hashTable = []
-        for _ in range(initialCapacity):
+        for _ in range(self._initialCapacity):
             self._hashTable.append(HashTableArrayNode())
         # If the array exceeds this fill percentage it will grow
         self._fillFactor = 0.75
-        self._maxItemsAtCurrentSize = int(initialCapacity * self._fillFactor) + 1
+        self._maxItemsAtCurrentSize = int(self._initialCapacity * self._fillFactor) + 1
         self._count = 0
 
     def add(self, key, value):
@@ -87,7 +87,7 @@ class HashTable(object):
         for node in self._hashTable:
             node.clear()
         self._count = 0
-        self._maxItemsAtCurrentSize = int(initialCapacity * self._fillFactor) + 1
+        self._maxItemsAtCurrentSize = int(self._initialCapacity * self._fillFactor) + 1
 
     def enumerate(self):
         """Enumerate all the values in the hash table

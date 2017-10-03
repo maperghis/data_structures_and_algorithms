@@ -59,5 +59,31 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(self.table.getValue(self.n1.key()), 99)
         self.assertRaises(ArgumentException, self.table.update, "jeremy", -42)
 
+    def testRemove(self):
+        """Test the remove method"""
+        self.table.add(self.n1.key(), self.n1.value())
+        self.assertTrue(self.table.contains(self.n1.key()))
+        self.assertEqual(self.table.count(), 1)
+        self.table.remove(self.n1.key())
+        self.assertFalse(self.table.contains(self.n1.key()))
+        self.assertEqual(self.table.count(), 0)
+
+    def testContains(self):
+        """Test the contains method"""
+        self.table.add(self.n1.key(), self.n1.value())
+        self.assertTrue(self.table.contains(self.n1.key()))
+        self.assertFalse(self.table.contains("jeremy"))
+
+    def testClear(self):
+        """Test the clear method"""
+        self.table.add(self.n1.key(), self.n1.value())
+        self.assertTrue(self.table.contains(self.n1.key()))
+        self.assertEqual(self.table.count(), 1)
+        self.table.clear()
+        self.assertFalse(self.table.contains(self.n1.key()))
+        self.assertEqual(self.table.count(), 0)
+        self.assertEqual(self.table.capacity(), 10)
+
+
 if __name__ == '__main__':
     unittest.main()
