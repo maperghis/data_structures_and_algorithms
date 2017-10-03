@@ -7,7 +7,8 @@
 
 A hash table is a key/value associative collection.
 """
-from src.hash.HashTableArrayNode import HashTableArrayNode
+from src.hash.hashTableArrayNode import HashTableArrayNode
+import hashlib
 
 
 class HashTable(object):
@@ -32,10 +33,10 @@ class HashTable(object):
         if self._count >= self._maxItemsAtCurrentSize:
             largerHashTable = [HashTableArrayNode()] * (self.capacity() * 2)
             for node in self.enumerate():
-                largerHashTable[getIndex(node.key)].add(node.key, node.value)
+                largerHashTable[self.getIndex(node.key)].add(node.key, node.value)
             self._hashTable = largerHashTable
             self._maxItemsAtCurrentSize = int(self.capacity() * self._fillFactor) + 1
-        self._hashTable[getIndex(key)].add(key, value)
+        self._hashTable[self.getIndex(key)].add(key, value)
         self._count += 1
 
     def update(self, key, value):
@@ -43,14 +44,14 @@ class HashTable(object):
         :param key: key to update
         :param value: new value
         """
-        self._hashTable[getIndex(key)].update(key, value)
+        self._hashTable[self.getIndex(key)].update(key, value)
 
     def remove(self, key):
         """Remove the key
         :param key: key to remove
         :returns: true if the key was removed
         """
-        removed = self._hashTable[getIndex(key)].remove(key):
+        removed = self._hashTable[self.getIndex(key)].remove(key)
         if removed:
             self._count -= 1
         return removed
@@ -60,14 +61,14 @@ class HashTable(object):
         :param key: key to find
         :returns: value of the given key
         """
-        return self._hashTable[getIndex(key)].getValue(key)
+        return self._hashTable[self.getIndex(key)].getValue(key)
 
     def contains(self, key):
         """Returns true if the key exists in the hash table
         :param key: key to find
         :returns: true if the key was found
         """
-        return self._hashTable[getIndex(key)].contains(key)
+        return self._hashTable[self.getIndex(key)].contains(key)
 
     def capacity(self):
         """The capacity of the hash table array
@@ -89,6 +90,13 @@ class HashTable(object):
         """
         for node in self._hashTable:
             yield node.enumerate()
+
+    def getIndex(self, key):
+        """Get the index the key should be stored at
+        :returns: index
+        :rtype: integer
+        """
+        return int(hashlib.sha1(key).hexdigest(), 16) % self._maxItemsAtCurrentSize
 
     def count(self):
         """The number of items in the hash table
