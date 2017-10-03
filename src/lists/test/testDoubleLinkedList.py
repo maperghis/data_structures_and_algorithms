@@ -112,13 +112,13 @@ class TestDoubleLinkedList(unittest.TestCase):
         self.llist.addLast(self.D)
         for idx, node in enumerate(self.llist.enumerate()):
             if idx == 0:
-                self.assertEqual(node.value, 1)
+                self.assertEqual(node, 1)
             elif idx == 1:
-                self.assertEqual(node.value, 2)
+                self.assertEqual(node, 2)
             elif idx == 2:
-                self.assertEqual(node.value, 3)
+                self.assertEqual(node, 3)
             elif idx == 3:
-                self.assertEqual(node.value, 3)
+                self.assertEqual(node, 3)
 
     def testContains(self):
         """Test the LinkedList.contains method"""

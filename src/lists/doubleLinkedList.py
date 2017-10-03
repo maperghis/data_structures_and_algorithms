@@ -37,6 +37,8 @@ class DoubleLinkedList(object):
         :param node: node to insert
         :type node: Node
         """
+        if not isinstance(node, Node):
+            node = Node(node)
         # Before: Head ------> 2 <-> 3 -> None
         # After: Head -> 1 <-> 2 <-> 3 -> None
         temp = self.head
@@ -164,13 +166,13 @@ class DoubleLinkedList(object):
         if self.head:
             node = self.head
             while node != None:
-                yield node
+                yield node.value
                 node = node.next
 
     def contains(self, value):
         """Check to see if the linked list contains the given value"""
         for node in self.enumerate():
-            if node.value == value:
+            if node == value:
                 return True
         return False
 
@@ -180,8 +182,8 @@ class DoubleLinkedList(object):
         :rtype: List
         """
         ret = []
-        for node in self.enumerate():
-            ret.append(node.value)
+        for value in self.enumerate():
+            ret.append(value)
         return ret
 
     def clear(self):
