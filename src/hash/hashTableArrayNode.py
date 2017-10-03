@@ -52,10 +52,9 @@ class HashTableArrayNode(object):
         removed = False
         current = self._items.head
         while current != None:
-            if current.key() == key:
-                self._items.remove(current)
+            if current.value.key() == key:
+                self._items.remove(current.value)
                 removed = True
-                break
             current = current.next
         return removed
 
